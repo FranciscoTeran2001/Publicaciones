@@ -21,6 +21,7 @@
         <module>notificaciones</module>
         <module>catalago</module>
         <module>api-gateway</module>
+        <module>authservice</module>
     </modules>
 
 

@@ -1,9 +1,11 @@
 package authservice.controller;
 
+import authservice.payload.*;
 import authservice.util.JwtUtils;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -18,15 +20,11 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody LoginRequest request) {
+    public AuthenticationResponse login(@Valid @RequestBody AuthenticationRequest req) {
         Authentication auth = authManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.username, request.password)
+                new UsernamePasswordAuthenticationToken(req.getUsername(), req.getPassword())
         );
-        return jwtUtils.generateJwtToken(auth);
-    }
-
-    public static class LoginRequest {
-        public String username;
-        public String password;
+        String token = jwtUtils.generateJwtToken(auth);
+        return new AuthenticationResponse(token);
     }
 }

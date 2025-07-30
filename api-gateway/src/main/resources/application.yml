@@ -46,6 +46,18 @@ spring:
                 - Path=/api/v1/catalogo/**
               filters:
                 - StripPrefix=2
+            # Rutas para el servicio de autenticación
+            - id: auth-login
+              uri: lb://SERVICE-AUTH
+              predicates:
+                - Path=/api/auth/**
+            # Rutas para el servicio de roles
+            - id: auth-roles
+              uri: lb://SERVICE-AUTH
+              predicates:
+                - Path=/api/v1/roles/**
+              filters:
+                - StripPrefix=2
 
 
 eureka:
