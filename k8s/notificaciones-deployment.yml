@@ -15,12 +15,14 @@ spec:
     spec:
       containers:
         - name: notificaciones
-          image: notificaciones:latest
+          image: rfgualotuna/notificaciones:latest
           ports:
             - containerPort: 8080
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: "kubernetes"
+            - name: SERVER_PORT
+              value: "8080"
             - name: SPRING_DATASOURCE_URL
               value: "jdbc:postgresql://cockroachdb-svc:26257/notificaciones_db?user=root&password="
             - name: SPRING_RABBITMQ_HOST

@@ -1,61 +1,41 @@
 #!/bin/bash
 
-echo "🚀 Construyendo todas las imágenes Docker..."
+echo "🧹 Eliminando imágenes anteriores..."
 
-# Compilar todos los microservicios
-echo "📦 Compilando con Maven..."
+
+echo "🚀 Construyendo imágenes con prefijo rfgualotuna/..."
+
+# Compilar
 mvn clean package -DskipTests
 
-# Construir imágenes Docker
-echo "🐳 Construyendo imágenes Docker..."
-
-# Eureka Server
-echo "📡 Construyendo eureka-server..."
+# Construir con prefijo correcto
 cd eureka-server
-docker build -t eureka-server:latest .
+docker build -t rfgualotuna/eureka-server:latest .
 cd ..
 
-# API Gateway
-echo "🌐 Construyendo api-gateway..."
 cd api-gateway
-docker build -t api-gateway:latest .
+docker build -t rfgualotuna/api-gateway:latest .
 cd ..
 
-# Auth Service
-echo "🔐 Construyendo authservice..."
 cd authservice
-docker build -t authservice:latest .
+docker build -t rfgualotuna/authservice:latest .
 cd ..
 
-# Publicaciones
-echo "📚 Construyendo publicaciones..."
 cd publicaciones
-docker build -t publicaciones:latest .
+docker build -t rfgualotuna/publicaciones:latest .
 cd ..
 
-# Notificaciones
-echo "🔔 Construyendo notificaciones..."
 cd notificaciones
-docker build -t notificaciones:latest .
+docker build -t rfgualotuna/notificaciones:latest .
 cd ..
 
-# Catalogo
-echo "📖 Construyendo catalogo..."
 cd catalago
-docker build -t catalogo:latest .
+docker build -t rfgualotuna/catalogo:latest .
 cd ..
 
-# Sincronización
-echo "⏰ Construyendo sincronizacion..."
 cd sincronizacion
-docker build -t sincronizacion:latest .
+docker build -t rfgualotuna/sincronizacion:latest .
 cd ..
 
-echo "✅ Todas las imágenes construidas correctamente!"
-echo ""
-echo "📋 Imágenes creadas:"
-docker images | grep -E "(eureka-server|api-gateway|authservice|publicaciones|notificaciones|catalogo|sincronizacion)"
-
-echo ""
-echo "🚀 Ahora puedes aplicar los manifiestos de Kubernetes:"
-echo "kubectl apply -f k8s/"
+echo "✅ Imágenes construidas con prefijo rfgualotuna/!"
+docker images | grep rfgualotuna/

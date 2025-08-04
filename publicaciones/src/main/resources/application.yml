@@ -1,13 +1,16 @@
+server:
+  port: 8080
+
 spring:
   application:
     name: SERVICE-PUBLICACIONES
   datasource:
-    url: jdbc:postgresql://localhost:26257/publicaciones_db?user=root&password=
+    url: jdbc:postgresql://cockroachdb-svc:26257/publicaciones_db?user=root&password=
     username: root
     password:
   jpa:
     hibernate:
-      ddl-auto: update # o create-drop si quieres reiniciar la BD cada vez
+      ddl-auto: update
     properties:
       hibernate:
         show_sql: true
@@ -15,18 +18,15 @@ spring:
         use_sql_comments: true
         dialect: org.hibernate.dialect.PostgreSQLDialect
   rabbitmq:
-    host: localhost
+    host: rabbitmq-svc
     port: 5672
     username: admin
     password: admin
 
-server:
-  port: 0
-
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://eureka-svc:8761/eureka/
     fetch-registry: true
     register-with-eureka: true
   instance:

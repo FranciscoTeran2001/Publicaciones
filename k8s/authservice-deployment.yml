@@ -15,12 +15,14 @@ spec:
     spec:
       containers:
         - name: authservice
-          image: authservice:latest
+          image: rfgualotuna/authservice:latest
           ports:
             - containerPort: 8080
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: "kubernetes"
+            - name: SERVER_PORT
+              value: "8080"
             - name: SPRING_DATASOURCE_URL
               value: "jdbc:postgresql://cockroachdb-svc:26257/auth_db?user=root&password="
             - name: EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE

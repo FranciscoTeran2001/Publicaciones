@@ -15,12 +15,14 @@ spec:
     spec:
       containers:
         - name: api-gateway
-          image: api-gateway:latest
+          image: rfgualotuna/api-gateway:latest
           ports:
             - containerPort: 8000
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: "kubernetes"
+            - name: SERVER_PORT
+              value: "8000"
             - name: EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE
               value: "http://eureka-svc:8761/eureka/"
             - name: JWT_SECRET

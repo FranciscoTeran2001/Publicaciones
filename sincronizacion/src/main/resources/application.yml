@@ -1,12 +1,12 @@
+server:
+  port: 8083
+
 spring:
   rabbitmq:
-    host: localhost
+    host: rabbitmq-svc
     port: 5672
     username: admin
     password: admin
-
-server:
-  port: 8083
 
 reloj:
   interval: 10
