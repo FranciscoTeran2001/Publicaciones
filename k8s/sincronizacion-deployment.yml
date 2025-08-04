@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sincronizacion
+  namespace: microservices-ns
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sincronizacion
+  template:
+    metadata:
+      labels:
+        app: sincronizacion
+    spec:
+      containers:
+        - name: sincronizacion
+          image: sincronizacion:latest
+          ports:
+            - containerPort: 8083
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "kubernetes"
+            - name: SPRING_RABBITMQ_HOST
+              value: "rabbitmq-svc"
+            - name: SPRING_RABBITMQ_PORT
+              value: "5672"
+            - name: SPRING_RABBITMQ_USERNAME
+              value: "admin"
+            - name: SPRING_RABBITMQ_PASSWORD
+              value: "admin"
+            - name: RELOJ_INTERVAL
+              value: "10"
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 200m
+              memory: 512Mi

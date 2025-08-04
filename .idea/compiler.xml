@@ -20,6 +20,15 @@
         <module name="notificaciones" />
         <module name="catalago" />
         <module name="sincronizacion" />
+      </profile>
+      <profile name="Annotation profile for authservice" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
+        </processorPath>
         <module name="authservice" />
       </profile>
     </annotationProcessing>
@@ -30,7 +39,7 @@
       <module name="authservice" options="-parameters" />
       <module name="catalago" options="-parameters" />
       <module name="eureka-server" options="-parameters" />
-      <module name="microservicios" options="-parameters" />
+      <module name="microservicios" options="" />
       <module name="notificaciones" options="-parameters" />
       <module name="publicaciones" options="-parameters" />
       <module name="sincronizacion" options="-parameters" />

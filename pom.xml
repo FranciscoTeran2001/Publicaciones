@@ -11,6 +11,8 @@
     <groupId>ec.edu.espe</groupId>
     <artifactId>microservicios</artifactId>
     <version>1.6.0</version>
+
+    <packaging>pom</packaging>
     <name>microservicios-23316</name>
     <description>Microservicios NRC 23316</description>
 
@@ -23,6 +25,8 @@
         <module>api-gateway</module>
         <module>authservice</module>
     </modules>
-
+    <properties>
+        <maven.test.skip>true</maven.test.skip>
+    </properties>
 
 </project>

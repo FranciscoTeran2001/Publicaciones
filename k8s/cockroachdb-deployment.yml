@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cockroachdb
+  namespace: microservices-ns
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cockroachdb
+  template:
+    metadata:
+      labels:
+        app: cockroachdb
+    spec:
+      containers:
+        - name: cockroachdb
+          image: cockroachdb/cockroach:latest
+          command:
+            - /cockroach/cockroach
+            - start-single-node
+            - --insecure
+            - --advertise-addr=cockroachdb-svc
+          ports:
+            - containerPort: 26257
+            - containerPort: 8080
+          resources:
+            requests:
+              cpu: 200m
+              memory: 512Mi
+            limits:
+              cpu: 500m
+              memory: 1Gi
+          # Crear las bases de datos automáticamente
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - /bin/sh
+                  - -c
+                  - |
+                    sleep 30
+                    /cockroach/cockroach sql --insecure --host=localhost --execute="
+                    CREATE DATABASE IF NOT EXISTS auth_db;
+                    CREATE DATABASE IF NOT EXISTS publicaciones_db;
+                    CREATE DATABASE IF NOT EXISTS notificaciones_db;
+                    CREATE DATABASE IF NOT EXISTS catalogos_db;
+                    "
