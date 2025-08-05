@@ -21,12 +21,12 @@ spec:
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: "kubernetes"
-            - name: SERVER_PORT
-              value: "8080"
             - name: SPRING_DATASOURCE_URL
               value: "jdbc:postgresql://cockroachdb-svc:26257/auth_db?user=root&password="
             - name: EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE
               value: "http://eureka-svc:8761/eureka/"
+            - name: JWT_SECRET
+              value: "u6rckmOPVwT9OuoWZf9lZtabfM6TTRGTYiS6OQ4Nkb8="
           resources:
             requests:
               cpu: 100m
